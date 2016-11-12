@@ -39,16 +39,15 @@ public class FeedActivity extends AppCompatActivity implements AdapterView.OnIte
 
         arrayList = new ArrayList<Question>();
 
-        arrayList.add(new Question("Honda Civic or Toyota Camry?"));
-        arrayList.add(new Question("Cat or Dog?"));
-        arrayList.add(new Question("Trump or Clinton?"));
-        arrayList.add(new Question("Android or iOS?"));
-        arrayList.add(new Question("Pie or Cake?"));
-        arrayList.add(new Question("COS 226 or COS 217?"));
-        arrayList.add(new Question("Princeton or Princeton?"));
+        arrayList.add(new Question("Which car?", "Honda Civic", "Toyota Camry", ""));
+        arrayList.add(new Question("Which pet?", "Cat", "Dog", ""));
+        arrayList.add(new Question("Who should I vote for?", "Trump", "Clinton", ""));
+        arrayList.add(new Question("What phone OS should I use?", "Android", "iOS", ""));
+        arrayList.add(new Question("What should I bake?", "Pie", "Cake", ""));
+        arrayList.add(new Question("Which class?", "COS 226", "COS 217", ""));
+        arrayList.add(new Question("Where should I matriculate?", "Princeton", "Harvard", ""));
 
         adapter = new ArrayAdapter<Question>(getApplicationContext(), android.R.layout.simple_list_item_1, arrayList);
-
         listView.setAdapter(adapter);
     }
 
