@@ -13,6 +13,6 @@ public class QDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String questionText = intent.getStringExtra(FeedActivity.QUESTION_KEY);
-        
+
     }
 }
