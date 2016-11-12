@@ -5,13 +5,13 @@ package com.hackprinceton.decide4u.model;
  */
 
 public class Question {
-        private String questionText;
+    private String questionText;
 
-        public Question(String s) {
+    public Question(String s) {
             questionText = s;
         }
 
-        public String toString() {
-            return questionText;
-        }
+    public String toString() {
+        return questionText;
+    }
 }

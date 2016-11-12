@@ -42,7 +42,6 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View view) {
-        if ()
         Intent i = new Intent(this, DashActivity.class);
         i.putExtra(QUESTION_KEY, question.getText().toString());
         i.putExtra(OPT1_KEY, opt1.getText().toString());
