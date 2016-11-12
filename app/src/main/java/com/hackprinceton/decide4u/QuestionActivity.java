@@ -31,6 +31,8 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
 
+        Intent intent = getIntent();
+
         question = (EditText) findViewById(R.id.question);
         opt1 = (EditText) findViewById(R.id.option1);
         opt2 = (EditText) findViewById(R.id.option2);

@@ -34,18 +34,27 @@ public class FeedActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_feed);
 
         button = (Button) findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(FeedActivity.this, QuestionActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
         listView = (ListView) findViewById(R.id.listView);
         listView.setOnItemClickListener(this);
 
         arrayList = new ArrayList<Question>();
 
-        arrayList.add(new Question("Which car?", "Honda Civic", "Toyota Camry", ""));
-        arrayList.add(new Question("Which pet?", "Cat", "Dog", ""));
-        arrayList.add(new Question("Who should I vote for?", "Trump", "Clinton", ""));
-        arrayList.add(new Question("What phone OS should I use?", "Android", "iOS", ""));
-        arrayList.add(new Question("What should I bake?", "Pie", "Cake", ""));
-        arrayList.add(new Question("Which class?", "COS 226", "COS 217", ""));
-        arrayList.add(new Question("Where should I matriculate?", "Princeton", "Harvard", ""));
+        arrayList.add(new Question("Which car?", "Honda Civic", "Toyota Camry", "Description"));
+        arrayList.add(new Question("Which pet?", "Cat", "Dog", "Description"));
+        arrayList.add(new Question("Who should I vote for?", "Trump", "Clinton", "Description"));
+        arrayList.add(new Question("What phone OS should I use?", "Android", "iOS", "Description"));
+        arrayList.add(new Question("What should I bake?", "Pie", "Cake", "Description"));
+        arrayList.add(new Question("Which class?", "COS 226", "COS 217", "Description"));
+        arrayList.add(new Question("Where should I matriculate?", "Princeton", "Harvard", "Description"));
 
         adapter = new ArrayAdapter<Question>(getApplicationContext(), android.R.layout.simple_list_item_1, arrayList);
         listView.setAdapter(adapter);

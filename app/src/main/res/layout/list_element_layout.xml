@@ -5,14 +5,9 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/tvName"
+        android:id="@+id/questionTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name" />
-    <TextView
-        android:id="@+id/tvHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="HomeTown" />
+        android:text="Question" />
 
 </LinearLayout>
