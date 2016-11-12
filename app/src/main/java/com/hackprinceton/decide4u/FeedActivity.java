@@ -20,7 +20,6 @@ public class FeedActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private Button button;
     private ListView listView;
-    private ArrayAdapter<Question> adapter;
     private ArrayList<Question> arrayList;
     public final static String QUESTION_KEY = "com.example.feedactivity.QUESTION";
 
@@ -56,7 +55,7 @@ public class FeedActivity extends AppCompatActivity implements AdapterView.OnIte
         arrayList.add(new Question("Which class?", "COS 226", "COS 217", "Description"));
         arrayList.add(new Question("Where should I matriculate?", "Princeton", "Harvard", "Description"));
 
-        adapter = new ArrayAdapter<Question>(getApplicationContext(), android.R.layout.simple_list_item_1, arrayList);
+        CustomListAdapter adapter = new CustomListAdapter(this, arrayList);
         listView.setAdapter(adapter);
     }
 
