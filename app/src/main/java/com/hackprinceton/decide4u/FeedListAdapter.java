@@ -13,8 +13,11 @@ import android.widget.TextView;
 
 import com.hackprinceton.decide4u.model.Question;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import static com.hackprinceton.decide4u.R.id.listView;
 
@@ -46,6 +49,7 @@ class FeedListAdapter extends ArrayAdapter<Question> {
     private static class ViewHolder {
         TextView questionTv;
         TextView usernameTv;
+        TextView submitTimeTv;
     }
 
     @Override
@@ -58,14 +62,24 @@ class FeedListAdapter extends ArrayAdapter<Question> {
             convertView = qInflater.inflate(R.layout.question_detail_layout, parent, false);
             holder.questionTv = (TextView) convertView.findViewById(R.id.qTitle);
             holder.usernameTv = (TextView) convertView.findViewById(R.id.qUsername);
+            holder.submitTimeTv = (TextView) convertView.findViewById(R.id.qSubmitTime);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
         Question question = getItem(position);
+
+        // set username and question title
         holder.questionTv.setText(question.getQuestion());
         holder.usernameTv.setText(question.getUsername());
+
+        // set submit time
+        Date date = new Date(question.getId());
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy ' - ' hh:mm a");
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT-5"));
+        String formattedDate = sdf.format(date);
+        holder.submitTimeTv.setText(formattedDate);
 
         // Declare button, button layout variables
         Button btnOpt1 = (Button)convertView.findViewById(R.id.btnOpt1);
