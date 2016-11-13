@@ -54,6 +54,14 @@ public class Question implements Serializable {
 
     public int getOpt2Votes() { return opt2Votes; }
 
+    public void vote1() {
+        opt1Votes++;
+    }
+
+    public void vote2() {
+        opt2Votes++;
+    }
+
     public String toString() {
         return (new Gson()).toJson(this);
     }

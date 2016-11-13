@@ -2,8 +2,10 @@ package com.hackprinceton.decide4u;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -13,16 +15,28 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.hackprinceton.decide4u.model.Question;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.hackprinceton.decide4u.R.id.listView;
 
 public class QDetailActivity extends AppCompatActivity{
     public final static String QUESTION_KEY = "question";
 
+    private final static String TAG = "TAG-QDetailActivity";
+
     private Context mContext;
+
+    private ApiEndpointInterface mApiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +90,12 @@ public class QDetailActivity extends AppCompatActivity{
         prog1Votes.setText(opt1Votes + " Votes");
         prog2Votes.setText(opt2Votes + " Votes");
 
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://decide4u-149303.appspot.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        mApiService = retrofit.create(ApiEndpointInterface.class);
+
         // Listeners for two option buttons
         questionOpt1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -87,6 +107,27 @@ public class QDetailActivity extends AppCompatActivity{
                 prog2Name.setText(question.getOpt2());
 
                 progBarLayout.setVisibility(view.VISIBLE);
+
+                question.vote1();
+
+                AsyncTask.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        Call<Question> call = mApiService.update(question.getId(), question);
+                        call.enqueue(new Callback<Question>() {
+                            @Override
+                            public void onResponse(Call<Question> call, Response<Question> response) {
+                                Log.d(TAG, "Update question success: " + (new Gson()).toJson(response.body()));
+                            }
+
+                            @Override
+                            public void onFailure(Call<Question> call, Throwable t) {
+                                Log.d(TAG, "Update question fail");
+                                t.printStackTrace();
+                            }
+                        });
+                    }
+                });
             }
         });
 
@@ -100,6 +141,27 @@ public class QDetailActivity extends AppCompatActivity{
                 prog2Name.setText(question.getOpt2());
 
                 progBarLayout.setVisibility(view.VISIBLE);
+
+                question.vote2();
+
+                AsyncTask.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        Call<Question> call = mApiService.update(question.getId(), question);
+                        call.enqueue(new Callback<Question>() {
+                            @Override
+                            public void onResponse(Call<Question> call, Response<Question> response) {
+                                Log.d(TAG, "Update question success: " + (new Gson()).toJson(response.body()));
+                            }
+
+                            @Override
+                            public void onFailure(Call<Question> call, Throwable t) {
+                                Log.d(TAG, "Update question fail");
+                                t.printStackTrace();
+                            }
+                        });
+                    }
+                });
             }
         });
     }

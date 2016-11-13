@@ -1,6 +1,8 @@
 package com.hackprinceton.decide4u;
 
 import android.content.Context;
+import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +13,17 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.hackprinceton.decide4u.model.Question;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.hackprinceton.decide4u.R.id.listView;
 
@@ -23,14 +32,24 @@ import static com.hackprinceton.decide4u.R.id.listView;
  */
 
 class FeedListAdapter extends ArrayAdapter<Question> {
+    private static final String TAG = "TAG-FeedListAdapter";
+
     private Context qContext;
     private LayoutInflater qInflater;
     private List<Question> questions;
+
+    private ApiEndpointInterface mApiService;
 
     FeedListAdapter(Context context, List<Question> questions) {
         super(context, 0, questions);
         this.questions = questions;
         qInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://decide4u-149303.appspot.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        mApiService = retrofit.create(ApiEndpointInterface.class);
     }
 
     @Override
@@ -63,7 +82,7 @@ class FeedListAdapter extends ArrayAdapter<Question> {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Question question = getItem(position);
+        final Question question = getItem(position);
         holder.questionTv.setText(question.getQuestion());
         holder.usernameTv.setText(question.getUsername());
 
@@ -107,6 +126,27 @@ class FeedListAdapter extends ArrayAdapter<Question> {
                 progBarLayout.setVisibility(view.VISIBLE);
 
                 notifyDataSetChanged();
+
+                question.vote1();
+
+                AsyncTask.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        Call<Question> call = mApiService.update(question.getId(), question);
+                        call.enqueue(new Callback<Question>() {
+                            @Override
+                            public void onResponse(Call<Question> call, Response<Question> response) {
+                                Log.d(TAG, "Update question success: " + (new Gson()).toJson(response.body()));
+                            }
+
+                            @Override
+                            public void onFailure(Call<Question> call, Throwable t) {
+                                Log.d(TAG, "Update question fail");
+                                t.printStackTrace();
+                            }
+                        });
+                    }
+                });
             }
         });
         btnOpt2.setOnClickListener(new View.OnClickListener(){
@@ -116,6 +156,27 @@ class FeedListAdapter extends ArrayAdapter<Question> {
                 progBarLayout.setVisibility(view.VISIBLE);
 
                 notifyDataSetChanged();
+
+                question.vote2();
+
+                AsyncTask.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        Call<Question> call = mApiService.update(question.getId(), question);
+                        call.enqueue(new Callback<Question>() {
+                            @Override
+                            public void onResponse(Call<Question> call, Response<Question> response) {
+                                Log.d(TAG, "Update question success: " + (new Gson()).toJson(response.body()));
+                            }
+
+                            @Override
+                            public void onFailure(Call<Question> call, Throwable t) {
+                                Log.d(TAG, "Update question fail");
+                                t.printStackTrace();
+                            }
+                        });
+                    }
+                });
             }
         });
 
