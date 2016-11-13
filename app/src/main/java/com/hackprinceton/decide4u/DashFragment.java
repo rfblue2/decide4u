@@ -119,9 +119,9 @@ public class DashFragment extends Fragment implements AdapterView.OnItemClickLis
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
-        String questionStr = ((Question) parent.getItemAtPosition(i)).getQuestion();
+        Question q = (Question) parent.getItemAtPosition(i);
         Intent intent = new Intent(mContext, QDetailActivity.class);
-        intent.putExtra(QDetailActivity.QUESTION_KEY, questionStr);
+        intent.putExtra(QDetailActivity.QUESTION_KEY, q);
         startActivity(intent);
     }
 }

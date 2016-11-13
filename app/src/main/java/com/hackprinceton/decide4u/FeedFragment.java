@@ -29,7 +29,8 @@ public class FeedFragment extends Fragment implements AdapterView.OnItemClickLis
 
     private static final String TAG = "TAG-FeedFragment";
 
-    private Button button;
+    private Button btnDecision;
+    private Button btnRefresh;
     private ListView listView;
     private FeedListAdapter adapter;
 
@@ -57,11 +58,19 @@ public class FeedFragment extends Fragment implements AdapterView.OnItemClickLis
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_feed, container, false);
-        button = (Button) view.findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
+        btnDecision = (Button) view.findViewById(R.id.btn_decision);
+        btnDecision.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, QuestionActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        btnRefresh = (Button) view.findViewById(R.id.btn_refresh);
+        btnRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                refresh();
             }
         });
 
@@ -80,6 +89,10 @@ public class FeedFragment extends Fragment implements AdapterView.OnItemClickLis
     @Override
     public void onResume() {
         super.onResume();
+        refresh();
+    }
+
+    private void refresh() {
         // Pull from server recent
         AsyncTask.execute(new Runnable() {
             @Override

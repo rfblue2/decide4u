@@ -32,7 +32,6 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
 
     private static final String TAG = "TAG-QuestionActivity";
 
-    public static final String QUESTION_KEY = "com.questionactivity.question";
     public EditText question;
     public EditText opt1;
     public EditText opt2;

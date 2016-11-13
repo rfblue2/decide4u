@@ -58,7 +58,9 @@ public class QDetailActivity extends AppCompatActivity{
         int opt1Votes = question.getOpt1Votes();
         int opt2Votes = question.getOpt2Votes();
 
-        int percentage = (int) (100 * opt1Votes / (opt1Votes + opt2Votes));
+        int percentage = 50;
+        if (opt1Votes + opt2Votes != 0)
+            percentage = (int) (100 * opt1Votes / (opt1Votes + opt2Votes));
 
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setProgress(percentage);
