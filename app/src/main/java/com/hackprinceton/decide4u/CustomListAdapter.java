@@ -73,6 +73,9 @@ class CustomListAdapter extends ArrayAdapter<Question> {
         final LinearLayout btnLayout = (LinearLayout)convertView.findViewById(R.id.btnLayout);
         final RelativeLayout progBarLayout = (RelativeLayout)convertView.findViewById(R.id.progBarLayout);
 
+        btnOpt1.setText(question.getOpt1());
+        btnOpt2.setText(question.getOpt2());
+
         // Progress bar
         int opt1Votes = question.getOpt1Votes();
         int opt2Votes = question.getOpt2Votes();
