@@ -45,7 +45,7 @@ public class DashListAdapter extends ArrayAdapter<Question> {
         }
 
         Question questionTitle = getItem(position);
-        holder.questionTextView.setText(questionTitle.toString());
+        holder.questionTextView.setText(questionTitle.getQuestion());
 
         return convertView;
     }

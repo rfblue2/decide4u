@@ -73,14 +73,5 @@ public class QDetailActivity extends AppCompatActivity{
                 progBarLayout.setVisibility(view.VISIBLE);
             }
         });
-
-        // Comments listview
-        listView = (ListView) findViewById(listView);
-        arrayList = new ArrayList<Question>();
-
-
-
-        CustomListAdapter adapter = new CustomListAdapter(this, arrayList);
-        listView.setAdapter(adapter);
     }
 }

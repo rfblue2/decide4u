@@ -62,7 +62,7 @@ class CustomListAdapter extends ArrayAdapter<Question> {
         }
 
         Question question = getItem(position);
-        holder.questionTv.setText(question.toString());
+        holder.questionTv.setText(question.getQuestion());
         holder.usernameTv.setText(question.getUsername());
 
         Button btnOpt1 = (Button)convertView.findViewById(R.id.btnOpt1);
