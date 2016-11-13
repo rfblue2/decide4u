@@ -70,16 +70,15 @@ class CustomListAdapter extends ArrayAdapter<Question> {
         final LinearLayout btnLayout = (LinearLayout)convertView.findViewById(R.id.btnLayout);
         final RelativeLayout progBarLayout = (RelativeLayout)convertView.findViewById(R.id.progBarLayout);
 
+        TextView prog1Name = (TextView) convertView.findViewById(R.id.prog1Name);
+        TextView prog2Name = (TextView) convertView.findViewById(R.id.prog2Name);
+        prog1Name.setText(question.getOpt1());
+        prog2Name.setText(question.getOpt2());
+
         btnOpt1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 btnLayout.setVisibility(view.GONE);
-
-                // TextView prog1Name = (TextView) view.findViewById(R.id.prog1Name);
-                // TextView prog2Name = (TextView) view.findViewById(R.id.prog2Name);
-                // prog1Name.setText(question.getOpt1());
-                // prog2Name.setText(question.getOpt2());
-
                 progBarLayout.setVisibility(view.VISIBLE);
 
                 notifyDataSetChanged();
@@ -87,8 +86,10 @@ class CustomListAdapter extends ArrayAdapter<Question> {
         });
         btnOpt2.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v) {
-                //do something
+            public void onClick(View view) {
+                btnLayout.setVisibility(view.GONE);
+                progBarLayout.setVisibility(view.VISIBLE);
+
                 notifyDataSetChanged();
             }
         });

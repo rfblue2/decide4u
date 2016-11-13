@@ -84,6 +84,7 @@
                 android:layout_height="match_parent"
                 android:text="Option 1"
                 android:textColor="#111122"
+                android:focusable="false"
                 android:paddingRight="8dp"
                 android:layout_weight="1" />
             <Button
@@ -92,6 +93,7 @@
                 android:layout_height="match_parent"
                 android:text="Option 2"
                 android:textColor="#111122"
+                android:focusable="false"
                 android:paddingLeft="8dp"
                 android:layout_weight="1" />
         </LinearLayout>
