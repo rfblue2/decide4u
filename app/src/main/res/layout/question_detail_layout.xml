@@ -6,8 +6,8 @@
     android:layout_height="wrap_content"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:paddingTop="12dp"
-    android:paddingBottom="12dp">
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
 
     <TextView
         android:id="@+id/qSubmitTime"
@@ -45,7 +45,7 @@
         android:text="Question"
         android:textSize="20sp"
         android:textColor="#111122"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="6dp"
         android:layout_below="@id/qSubmitTime"
         android:layout_alignParentStart="true" />
 
@@ -61,12 +61,13 @@
 
     <LinearLayout
         android:id="@+id/linearLayout1"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="140px"
+        android:layout_height="70dp"
         android:layout_below="@id/qTitle">
 
         <LinearLayout
-            android:id="@+id/linearLayout2"
+            android:id="@+id/btnLayout"
             android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -95,6 +96,7 @@
                 android:layout_weight="1" />
         </LinearLayout>
         <RelativeLayout
+            android:id="@+id/progBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone">
@@ -144,24 +146,6 @@
         </RelativeLayout>
    </LinearLayout>
 
-    <TextView
-        android:id="@+id/qDetailTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/linearLayout1"
-        android:text="Details"
-        android:layout_marginTop="4dp"
-        android:textSize="18dp"
-        android:textColor="#111122" />
-    <TextView
-        android:id="@+id/qDetails"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Details"
-        android:layout_below="@id/qDetailTitle"
-        android:layout_marginTop="4dp"
-        android:textSize="14dp"
-        android:textColor="#111122" />
 
 
 </RelativeLayout>

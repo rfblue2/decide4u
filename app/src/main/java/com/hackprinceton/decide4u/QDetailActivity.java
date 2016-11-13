@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hackprinceton.decide4u.model.Question;
@@ -19,7 +21,7 @@ public class QDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        Question question = (Question) bundle.getSerializable(QUESTION_KEY);
+        final Question question = (Question) bundle.getSerializable(QUESTION_KEY);
 
         TextView questionTitle = (TextView) findViewById(R.id.qTitle);
         TextView questionUser = (TextView) findViewById(R.id.qUsername);
@@ -32,5 +34,35 @@ public class QDetailActivity extends AppCompatActivity {
         questionOpt1.setText(question.getOpt1());
         questionOpt2.setText(question.getOpt2());
         questionDetails.setText(question.getDetails());
+
+        final LinearLayout btnLayout = (LinearLayout) findViewById(R.id.btnLayout);
+        final RelativeLayout progBarLayout = (RelativeLayout) findViewById(R.id.progBarLayout);
+
+
+        questionOpt1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                btnLayout.setVisibility(view.GONE);
+
+                TextView prog1Name = (TextView) findViewById(R.id.prog1Name);
+                TextView prog2Name = (TextView) findViewById(R.id.prog2Name);
+                prog1Name.setText(question.getOpt1());
+                prog2Name.setText(question.getOpt2());
+
+                progBarLayout.setVisibility(view.VISIBLE);
+            }
+        });
+
+        questionOpt2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                btnLayout.setVisibility(view.GONE);
+
+                TextView prog1Name = (TextView) findViewById(R.id.prog1Name);
+                TextView prog2Name = (TextView) findViewById(R.id.prog2Name);
+                prog1Name.setText(question.getOpt1());
+                prog2Name.setText(question.getOpt2());
+
+                progBarLayout.setVisibility(view.VISIBLE);
+            }
+        });
     }
 }
