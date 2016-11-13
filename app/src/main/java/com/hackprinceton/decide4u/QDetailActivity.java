@@ -20,11 +20,9 @@ import java.util.ArrayList;
 import static com.hackprinceton.decide4u.R.id.listView;
 
 public class QDetailActivity extends AppCompatActivity{
-    public final static String QUESTION_KEY = "com.example.feedactivity.QUESTION";
+    public final static String QUESTION_KEY = "question";
 
     private Context mContext;
-    private ListView listView;
-    private ArrayList<Question> arrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

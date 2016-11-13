@@ -2,10 +2,8 @@ package com.hackprinceton.decide4u;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,7 +16,6 @@ import android.widget.ListView;
 import com.google.gson.Gson;
 import com.hackprinceton.decide4u.model.Question;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -32,10 +29,9 @@ public class FeedFragment extends Fragment implements AdapterView.OnItemClickLis
 
     private static final String TAG = "TAG-FeedFragment";
 
-    public final static String QUESTION_KEY = "com.example.feedfragment.QUESTION";
     private Button button;
     private ListView listView;
-    private CustomListAdapter adapter;
+    private FeedListAdapter adapter;
 
     private Context mContext;
 
@@ -45,7 +41,7 @@ public class FeedFragment extends Fragment implements AdapterView.OnItemClickLis
         // Required empty public constructor
     }
 
-    public static FeedFragment newInstance(int page, String title) {
+    public static FeedFragment newInstance() {
         FeedFragment fragment = new FeedFragment();
 
         return fragment;
@@ -94,7 +90,7 @@ public class FeedFragment extends Fragment implements AdapterView.OnItemClickLis
                     public void onResponse(Call<List<Question>> call, Response<List<Question>> response) {
                         Log.d(TAG, "List feed q's success: " + (new Gson()).toJson(response.body()));
 
-                        adapter = new CustomListAdapter(mContext, (List<Question>)response.body());
+                        adapter = new FeedListAdapter(mContext, (List<Question>)response.body());
                         listView.setAdapter(adapter);
                     }
 
@@ -118,7 +114,8 @@ public class FeedFragment extends Fragment implements AdapterView.OnItemClickLis
     public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
         Bundle bundle = new Bundle();
         Question q = (Question) parent.getItemAtPosition(i);
-        bundle.putSerializable(QUESTION_KEY, q);
+        Log.d(TAG, "Sending " + q);
+        bundle.putSerializable(QDetailActivity.QUESTION_KEY, q);
 
         Intent intent = new Intent(mContext, QDetailActivity.class);
         intent.putExtras(bundle);

@@ -32,7 +32,6 @@ public class DashFragment extends Fragment implements AdapterView.OnItemClickLis
 
     private static final String TAG = "TAG-DashFragment";
 
-    public final static String QUESTION_KEY = "com.example.dashfragment.QUESTION";
     private Button newDec;
     private ListView myQuestions;
 
@@ -44,7 +43,7 @@ public class DashFragment extends Fragment implements AdapterView.OnItemClickLis
         // Required empty public constructor
     }
 
-    public static DashFragment newInstance(int page, String title) {
+    public static DashFragment newInstance() {
         DashFragment fragment = new DashFragment();
 
         return fragment;
@@ -122,7 +121,7 @@ public class DashFragment extends Fragment implements AdapterView.OnItemClickLis
     public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
         String questionStr = ((Question) parent.getItemAtPosition(i)).getQuestion();
         Intent intent = new Intent(mContext, QDetailActivity.class);
-        intent.putExtra(QUESTION_KEY, questionStr);
+        intent.putExtra(QDetailActivity.QUESTION_KEY, questionStr);
         startActivity(intent);
     }
 }

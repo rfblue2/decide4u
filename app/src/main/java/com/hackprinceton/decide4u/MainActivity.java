@@ -50,9 +50,9 @@ public static class TabPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return FeedFragment.newInstance(0, "Decision Feed");
+                return FeedFragment.newInstance();
             case 1:
-                return DashFragment.newInstance(1, "My Dashboard");
+                return DashFragment.newInstance();
             default:
                 return null;
         }

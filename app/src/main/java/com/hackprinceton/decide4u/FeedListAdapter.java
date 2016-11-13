@@ -22,12 +22,12 @@ import static com.hackprinceton.decide4u.R.id.listView;
  * Created by sherr on 11/12/2016.
  */
 
-class CustomListAdapter extends ArrayAdapter<Question> {
+class FeedListAdapter extends ArrayAdapter<Question> {
     private Context qContext;
     private LayoutInflater qInflater;
     private List<Question> questions;
 
-    CustomListAdapter(Context context, List<Question> questions) {
+    FeedListAdapter(Context context, List<Question> questions) {
         super(context, 0, questions);
         this.questions = questions;
         qInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
