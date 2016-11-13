@@ -101,11 +101,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                     }
                 });
 
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(QUESTION_KEY, q);
-                Intent i = new Intent(this, DashActivity.class);
-                i.putExtras(bundle);
-                startActivity(i);
+                finish();
             }
         }
 
