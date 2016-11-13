@@ -1,6 +1,7 @@
 package com.hackprinceton.decide4u;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -22,6 +23,7 @@ import com.hackprinceton.decide4u.model.Question;
 import java.io.IOException;
 
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -37,12 +39,16 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
     public EditText details;
     public Button submitBtn;
 
+    private Context mContext;
+
     private ApiEndpointInterface mApiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
+
+        mContext = this;
 
         Intent intent = getIntent();
 
@@ -82,7 +88,9 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                         .show();
             }
             else {
-                final Question q = new Question(qText, opt1Text, opt2Text, detailText, "user-submit");
+
+                String name = mContext.getSharedPreferences(LoginActivity.LOGIN_PREF, Context.MODE_PRIVATE).getString(LoginActivity.USERNAME_KEY, "user2");
+                final Question q = new Question(qText, opt1Text, opt2Text, detailText, name);
 
                 Log.d(TAG, "Sending " + q);
 
@@ -90,14 +98,19 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                 AsyncTask.execute(new Runnable() {
                     @Override
                     public void run() {
-                        Call<Void> call = mApiService.add(q);
-                        try {
-                            Response<Void> res = call.execute();
-                            Log.d(TAG, "Add question success, " + res.body());
-                        } catch (IOException e) {
-                            Log.d(TAG, "Add question API call failed");
-                            e.printStackTrace();
-                        }
+                        Call<Question> call = mApiService.add(q);
+                        call.enqueue(new Callback<Question>() {
+                            @Override
+                            public void onResponse(Call<Question> call, Response<Question> response) {
+                                Log.d(TAG, "Add question success, " + response.body());
+                            }
+
+                            @Override
+                            public void onFailure(Call<Question> call, Throwable t) {
+                                Log.d(TAG, "Add question API call failed");
+                                t.printStackTrace();
+                            }
+                        });
                     }
                 });
 

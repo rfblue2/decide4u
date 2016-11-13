@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.hackprinceton.decide4u.model.Question;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by RotomPlasma on 11/12/16.
@@ -18,9 +19,9 @@ import java.util.ArrayList;
 public class DashListAdapter extends ArrayAdapter<Question> {
     private Context qContext;
     private LayoutInflater qInflater;
-    private ArrayList<Question> qDataSource;
+    private List<Question> qDataSource;
 
-    public DashListAdapter(Context context, ArrayList<Question> questions) {
+    public DashListAdapter(Context context, List<Question> questions) {
         super(context, 0, questions);
         qDataSource = questions;
         qInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

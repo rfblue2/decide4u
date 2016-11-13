@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.hackprinceton.decide4u.model.Question;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.hackprinceton.decide4u.R.id.listView;
 
@@ -23,9 +24,9 @@ import static com.hackprinceton.decide4u.R.id.listView;
 class CustomListAdapter extends ArrayAdapter<Question> {
     private Context qContext;
     private LayoutInflater qInflater;
-    private ArrayList<Question> questions;
+    private List<Question> questions;
 
-    CustomListAdapter(Context context, ArrayList<Question> questions) {
+    CustomListAdapter(Context context, List<Question> questions) {
         super(context, 0, questions);
         this.questions = questions;
         qInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

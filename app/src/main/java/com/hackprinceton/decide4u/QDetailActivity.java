@@ -1,5 +1,6 @@
 package com.hackprinceton.decide4u;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +20,8 @@ import static com.hackprinceton.decide4u.R.id.listView;
 
 public class QDetailActivity extends AppCompatActivity{
     public final static String QUESTION_KEY = "com.example.feedactivity.QUESTION";
+
+    private Context mContext;
     private ListView listView;
     private ArrayList<Question> arrayList;
 
@@ -26,6 +29,8 @@ public class QDetailActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qdetail);
+
+        mContext = this;
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();

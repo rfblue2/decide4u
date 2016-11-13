@@ -13,7 +13,7 @@ public class Question implements Serializable {
 
     long id;
     String question = "", opt1 = "", opt2 = "", details = "", username = "";
-    int opt1Votes = 0, opt2Votes = 0;
+    int opt1Votes, opt2Votes;
 
     public Question(String question, String opt1, String opt2, String details, String username) {
         this.question = question;
@@ -22,8 +22,8 @@ public class Question implements Serializable {
         this.details = details;
         this.username = username;
 
-        opt1Votes = (int) (10 * Math.random());
-        opt2Votes = (int) (10 * Math.random());
+        opt1Votes = 0;
+        opt2Votes = 0;
     }
 
     public long getId() {
