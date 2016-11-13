@@ -2,4 +2,8 @@
     <string name="app_name">Decide4U</string>
     <string name="drawer_open">Open Navbar</string>
     <string name="drawer_close">Close Navbar</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
