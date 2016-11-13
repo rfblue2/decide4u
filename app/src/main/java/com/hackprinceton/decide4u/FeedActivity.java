@@ -47,13 +47,13 @@ public class FeedActivity extends AppCompatActivity implements AdapterView.OnIte
 
         arrayList = new ArrayList<Question>();
 
-        arrayList.add(new Question("Which car?", "Honda Civic", "Toyota Camry", "Description"));
-        arrayList.add(new Question("Which pet?", "Cat", "Dog", "Description"));
-        arrayList.add(new Question("Who should I vote for?", "Trump", "Clinton", "Description"));
-        arrayList.add(new Question("What phone OS should I use?", "Android", "iOS", "Description"));
-        arrayList.add(new Question("What should I bake?", "Pie", "Cake", "Description"));
-        arrayList.add(new Question("Which class?", "COS 226", "COS 217", "Description"));
-        arrayList.add(new Question("Where should I matriculate?", "Princeton", "Harvard", "Description"));
+        arrayList.add(new Question("Which car?", "Honda Civic", "Toyota Camry", "I want to get my wife a birthday present!", "user0"));
+        arrayList.add(new Question("Which pet?", "Cat", "Dog", "Description", "user1"));
+        arrayList.add(new Question("Who should I vote for?", "Trump", "Clinton", "Description", "user2"));
+        arrayList.add(new Question("What phone OS should I use?", "Android", "iOS", "Description", "user3"));
+        arrayList.add(new Question("What should I bake?", "Pie", "Cake", "Description", "user4"));
+        arrayList.add(new Question("Which class?", "COS 226", "COS 217", "Description", "user5"));
+        arrayList.add(new Question("Where should I matriculate?", "Princeton", "Harvard", "Description", "user6"));
 
         CustomListAdapter adapter = new CustomListAdapter(this, arrayList);
         listView.setAdapter(adapter);
@@ -61,9 +61,12 @@ public class FeedActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
-        String questionStr = (String) parent.getItemAtPosition(i).toString();
+        Bundle bundle = new Bundle();
+        Question q = (Question) parent.getItemAtPosition(i);
+        bundle.putSerializable(QUESTION_KEY, q);
+
         Intent intent = new Intent(FeedActivity.this, QDetailActivity.class);
-        intent.putExtra(QUESTION_KEY, questionStr);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 }

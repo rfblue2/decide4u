@@ -12,12 +12,14 @@ public class Question implements Serializable {
     private String opt1;
     private String opt2;
     private String details;
+    private String username;
 
-    public Question(String question, String opt1, String opt2, String details) {
+    public Question(String question, String opt1, String opt2, String details, String username) {
         this.question = question;
         this.opt1 = opt1;
         this.opt2 = opt2;
         this.details = details;
+        this.username = username;
     }
 
     public String getQuestion() {
@@ -34,6 +36,10 @@ public class Question implements Serializable {
 
     public String getDetails() {
         return details;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public String toString() {

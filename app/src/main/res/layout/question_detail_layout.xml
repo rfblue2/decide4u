@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/qDetailLayout"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="12dp"
+    android:paddingBottom="12dp">
+
+    <TextView
+        android:id="@+id/qSubmitTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="#h"
+        android:textSize="12sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/qUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username"
+        android:textSize="12sp"
+        android:layout_marginStart="8dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/qDash" />
+
+    <TextView
+        android:id="@+id/qDash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-"
+        android:textSize="12sp"
+        android:layout_marginStart="8dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/qSubmitTime" />
+
+    <TextView
+        android:id="@+id/qTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Question"
+        android:textSize="20sp"
+        android:textColor="#111122"
+        android:layout_marginTop="4dp"
+        android:layout_below="@id/qSubmitTime"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/qComments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="12sp"
+
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="140px"
+        android:layout_below="@id/qTitle">
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:layout_below="@id/qTitle"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/btnOpt1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="Option 1"
+                android:textColor="#111122"
+                android:paddingRight="8dp"
+                android:layout_weight="1" />
+            <Button
+                android:id="@+id/btnOpt2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="Option 2"
+                android:textColor="#111122"
+                android:paddingLeft="8dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+            <ProgressBar
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBar"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/prog1Name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text = "Option 1"
+                android:layout_below="@id/progressBar"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/prog2Name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text = "Option 2"
+                android:layout_below="@id/progressBar"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:id="@+id/prog1Votes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text= "# Votes"
+                android:textSize="12dp"
+                android:layout_below="@id/prog1Name"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/prog2Votes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text = "# Votes"
+                android:textSize="12dp"
+                android:layout_below="@id/prog2Name"
+                android:layout_alignParentEnd="true" />
+
+        </RelativeLayout>
+   </LinearLayout>
+
+    <TextView
+        android:id="@+id/qDetailTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linearLayout1"
+        android:text="Details"
+        android:layout_marginTop="4dp"
+        android:textSize="18dp"
+        android:textColor="#111122" />
+    <TextView
+        android:id="@+id/qDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Details"
+        android:layout_below="@id/qDetailTitle"
+        android:layout_marginTop="4dp"
+        android:textSize="14dp"
+        android:textColor="#111122" />
+
+
+</RelativeLayout>
