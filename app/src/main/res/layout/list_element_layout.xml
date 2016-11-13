@@ -25,20 +25,20 @@
         android:textSize="12sp"
         android:layout_marginStart="8dp"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/textView" />
+        android:layout_toEndOf="@+id/qDash" />
 
     <TextView
+        android:id="@+id/qDash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="-"
         android:textSize="12sp"
-        android:id="@+id/textView"
         android:layout_marginStart="8dp"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/qSubmitTime" />
 
     <TextView
-        android:id="@+id/questionTitle"
+        android:id="@+id/qTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Question"

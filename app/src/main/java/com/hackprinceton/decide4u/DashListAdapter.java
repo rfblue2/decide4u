@@ -26,22 +26,22 @@ public class DashListAdapter extends ArrayAdapter<Question> {
         qInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-    static class ViewHolder {
+    private static class ViewHolder {
         TextView questionTextView;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        CustomListAdapter.ViewHolder holder;
+        DashListAdapter.ViewHolder holder;
 
         // if an existing view is not being reused, inflate the view
         if (convertView == null) {
-            holder = new CustomListAdapter.ViewHolder();
+            holder = new DashListAdapter.ViewHolder();
             convertView = qInflater.inflate(R.layout.dashlist_elem_layout, parent, false);
             holder.questionTextView = (TextView) convertView.findViewById(R.id.questionTitle);
             convertView.setTag(holder);
         } else {
-            holder = (CustomListAdapter.ViewHolder) convertView.getTag();
+            holder = (DashListAdapter.ViewHolder) convertView.getTag();
         }
 
         Question questionTitle = getItem(position);

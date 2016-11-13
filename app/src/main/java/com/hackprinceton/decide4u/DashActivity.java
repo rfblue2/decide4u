@@ -40,9 +40,9 @@ public class DashActivity extends AppCompatActivity implements AdapterView.OnIte
 
         qList = new ArrayList<Question>();
 
-        qList.add(new Question("Which car?", "Honda Civic", "Toyota Camry", "Description"));
-        qList.add(new Question("What phone OS should I use?", "Android", "iOS", "Description"));
-        qList.add(new Question("Which class?", "COS 226", "COS 217", "Description"));
+        qList.add(new Question("Which car?", "Honda Civic", "Toyota Camry", "Description", "user0"));
+        qList.add(new Question("What phone OS should I use?", "Android", "iOS", "Description", "user1"));
+        qList.add(new Question("Which class?", "COS 226", "COS 217", "Description", "user2"));
 
         CustomListAdapter adapter = new CustomListAdapter(this, qList);
         myQuestions.setAdapter(adapter);

@@ -10,12 +10,9 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.hackprinceton.decide4u.QDetailActivity">
 
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:id="@+id/questionTv"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        />
+    <include
+        android:id="@+id/layoutid"
+        layout="@layout/question_detail_layout" />
+
+
 </RelativeLayout>

@@ -62,7 +62,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
         }
         else {
             Bundle bundle = new Bundle();
-            Question q = new Question(qText, opt1Text, opt2Text, detailText);
+            Question q = new Question(qText, opt1Text, opt2Text, detailText, "user-submit");
             bundle.putSerializable(QUESTION_KEY, q);
             Intent i = new Intent(this, DashActivity.class);
             i.putExtras(bundle);
