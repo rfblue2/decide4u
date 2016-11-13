@@ -24,6 +24,11 @@ public class LoginActivity extends AppCompatActivity {
 
         mContext = this;
 
+        if (mContext.getSharedPreferences(LoginActivity.LOGIN_PREF, Context.MODE_PRIVATE).contains(LoginActivity.USERNAME_KEY)) {
+            Intent i = new Intent(mContext, MainActivity.class);
+            startActivity(i);
+        }
+
         login = (Button) findViewById(R.id.btnlogin);
         usernameText = (EditText) findViewById(R.id.etusername);
 
@@ -32,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 mContext.getSharedPreferences(LOGIN_PREF, Context.MODE_PRIVATE).edit()
                         .putString(USERNAME_KEY, usernameText.getText().toString()).apply();
-                Intent i = new Intent(mContext, DashActivity.class);
+                Intent i = new Intent(mContext, MainActivity.class);
                 startActivity(i);
             }
         });

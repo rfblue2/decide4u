@@ -2,13 +2,16 @@ package com.hackprinceton.decide4u;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -24,40 +27,49 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Displays other people's questions
- */
-public class FeedActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    private static final String TAG = "TAG-FeedActivity";
-    public final static String QUESTION_KEY = "com.example.feedactivity.QUESTION";
+public class FeedFragment extends Fragment implements AdapterView.OnItemClickListener {
 
+    private static final String TAG = "TAG-FeedFragment";
+
+    public final static String QUESTION_KEY = "com.example.feedfragment.QUESTION";
     private Button button;
     private ListView listView;
     private CustomListAdapter adapter;
+
     private Context mContext;
 
     private ApiEndpointInterface mApiService;
 
-    public FeedActivity() {
+    public FeedFragment() {
+        // Required empty public constructor
     }
 
+    public static FeedFragment newInstance(int page, String title) {
+        FeedFragment fragment = new FeedFragment();
+
+        return fragment;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_feed);
 
-        button = (Button) findViewById(R.id.button);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_feed, container, false);
+        button = (Button) view.findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent intent = new Intent(FeedActivity.this, QuestionActivity.class);
+                Intent intent = new Intent(mContext, QuestionActivity.class);
                 startActivity(intent);
             }
         });
 
-
-        listView = (ListView) findViewById(R.id.listView);
+        listView = (ListView) view.findViewById(R.id.listView);
         listView.setOnItemClickListener(this);
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -65,19 +77,12 @@ public class FeedActivity extends AppCompatActivity implements AdapterView.OnIte
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         mApiService = retrofit.create(ApiEndpointInterface.class);
-//        arrayList = new ArrayList<Question>();
 
-//        arrayList.add(new Question("Which car?", "Honda Civic", "Toyota Camry", "I want to get my wife a birthday present!", "user0"));
-//        arrayList.add(new Question("Which pet?", "Cat", "Dog", "Description", "user1"));
-//        arrayList.add(new Question("Who should I vote for?", "Trump", "Clinton", "Description", "user2"));
-//        arrayList.add(new Question("What phone OS should I use?", "Android", "iOS", "Description", "user3"));
-//        arrayList.add(new Question("What should I bake?", "Pie", "Cake", "Description", "user4"));
-//        arrayList.add(new Question("Which class?", "COS 226", "COS 217", "Description", "user5"));
-//        arrayList.add(new Question("Where should I matriculate?", "Princeton", "Harvard", "Description", "user6"));
+        return view;
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         // Pull from server recent
         AsyncTask.execute(new Runnable() {
@@ -104,12 +109,18 @@ public class FeedActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = context;
+    }
+
+    @Override
     public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
         Bundle bundle = new Bundle();
         Question q = (Question) parent.getItemAtPosition(i);
         bundle.putSerializable(QUESTION_KEY, q);
 
-        Intent intent = new Intent(FeedActivity.this, QDetailActivity.class);
+        Intent intent = new Intent(mContext, QDetailActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
     }
