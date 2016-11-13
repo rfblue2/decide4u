@@ -15,27 +15,42 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/btn_decision">
+        android:layout_above="@+id/btnLayout">
     </ListView>
 
-    <Button
-        android:text="New Decision"
-        android:textSize="20sp"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/btnLayout"
+        android:visibility="visible"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_decision"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:weightSum="2"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true">
 
-    <Button
-        android:text="Refresh"
-        android:textSize="20sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_refresh"
-        android:layout_alignBaseline="@+id/btn_decision"
-        android:layout_alignBottom="@+id/btn_decision"
-        android:layout_toLeftOf="@+id/btn_decision"
-        android:layout_alignParentEnd="true" />
+        <Button
+            android:id="@+id/btn_decision"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="New Decision"
+            android:textSize="20sp"
+            android:focusable="false"
+            android:paddingRight="8dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/btn_refresh"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Refresh"
+            android:textSize="20sp"
+            android:focusable="false"
+            android:paddingRight="8dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
 
 </RelativeLayout>
