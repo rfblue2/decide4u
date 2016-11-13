@@ -1,6 +1,8 @@
 package com.hackprinceton.decide4u.model;
 
 
+import com.google.gson.Gson;
+
 import java.io.Serializable;
 
 /**
@@ -8,11 +10,9 @@ import java.io.Serializable;
  */
 
 public class Question implements Serializable {
-    private String question;
-    private String opt1;
-    private String opt2;
-    private String details;
-    private String username;
+
+    long id;
+    String question = "", opt1 = "", opt2 = "", details = "", username = "";
 
     public Question(String question, String opt1, String opt2, String details, String username) {
         this.question = question;
@@ -20,6 +20,10 @@ public class Question implements Serializable {
         this.opt2 = opt2;
         this.details = details;
         this.username = username;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getQuestion() {
@@ -43,6 +47,6 @@ public class Question implements Serializable {
     }
 
     public String toString() {
-        return question;
+        return (new Gson()).toJson(this);
     }
 }
