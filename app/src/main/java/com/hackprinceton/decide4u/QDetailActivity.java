@@ -4,15 +4,23 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hackprinceton.decide4u.model.Question;
 
-public class QDetailActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+import static com.hackprinceton.decide4u.R.id.listView;
+
+public class QDetailActivity extends AppCompatActivity{
     public final static String QUESTION_KEY = "com.example.feedactivity.QUESTION";
+    private ListView listView;
+    private ArrayList<Question> arrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +43,11 @@ public class QDetailActivity extends AppCompatActivity {
         questionOpt2.setText(question.getOpt2());
         questionDetails.setText(question.getDetails());
 
+        // Two layouts for toggling between buttons and percentage bar
         final LinearLayout btnLayout = (LinearLayout) findViewById(R.id.btnLayout);
         final RelativeLayout progBarLayout = (RelativeLayout) findViewById(R.id.progBarLayout);
 
-
+        // Listeners for two option buttons
         questionOpt1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 btnLayout.setVisibility(view.GONE);
@@ -64,5 +73,14 @@ public class QDetailActivity extends AppCompatActivity {
                 progBarLayout.setVisibility(view.VISIBLE);
             }
         });
+
+        // Comments listview
+        listView = (ListView) findViewById(listView);
+        arrayList = new ArrayList<Question>();
+
+
+
+        CustomListAdapter adapter = new CustomListAdapter(this, arrayList);
+        listView.setAdapter(adapter);
     }
 }

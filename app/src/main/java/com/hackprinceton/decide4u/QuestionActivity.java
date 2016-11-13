@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -61,12 +62,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                     .show();
         }
         else {
-            Bundle bundle = new Bundle();
-            Question q = new Question(qText, opt1Text, opt2Text, detailText, "user-submit");
-            bundle.putSerializable(QUESTION_KEY, q);
-            Intent i = new Intent(this, DashActivity.class);
-            i.putExtras(bundle);
-            startActivity(i);
+            finish();
         }
     }
 }
