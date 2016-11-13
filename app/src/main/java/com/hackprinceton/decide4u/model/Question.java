@@ -13,6 +13,7 @@ public class Question implements Serializable {
 
     long id;
     String question = "", opt1 = "", opt2 = "", details = "", username = "";
+    int opt1Votes = 0, opt2Votes = 0;
 
     public Question(String question, String opt1, String opt2, String details, String username) {
         this.question = question;
@@ -20,6 +21,9 @@ public class Question implements Serializable {
         this.opt2 = opt2;
         this.details = details;
         this.username = username;
+
+        opt1Votes = (int) (10 * Math.random());
+        opt2Votes = (int) (10 * Math.random());
     }
 
     public long getId() {
@@ -45,6 +49,10 @@ public class Question implements Serializable {
     public String getUsername() {
         return username;
     }
+
+    public int getOpt1Votes() { return opt1Votes; }
+
+    public int getOpt2Votes() { return opt2Votes; }
 
     public String toString() {
         return (new Gson()).toJson(this);
