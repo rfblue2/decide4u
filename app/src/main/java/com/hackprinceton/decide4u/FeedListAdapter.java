@@ -38,10 +38,13 @@ class FeedListAdapter extends ArrayAdapter<Question> {
     private LayoutInflater qInflater;
     private List<Question> questions;
 
+    private Context mContext;
+
     private ApiEndpointInterface mApiService;
 
     FeedListAdapter(Context context, List<Question> questions) {
         super(context, 0, questions);
+        mContext = context;
         this.questions = questions;
         qInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -86,11 +89,19 @@ class FeedListAdapter extends ArrayAdapter<Question> {
         holder.questionTv.setText(question.getQuestion());
         holder.usernameTv.setText(question.getUsername());
 
+        final String name = mContext.getSharedPreferences(LoginActivity.LOGIN_PREF, Context.MODE_PRIVATE).getString(LoginActivity.USERNAME_KEY, "");
+
         // Declare button, button layout variables
         Button btnOpt1 = (Button)convertView.findViewById(R.id.btnOpt1);
         Button btnOpt2 = (Button)convertView.findViewById(R.id.btnOpt2);
         final LinearLayout btnLayout = (LinearLayout)convertView.findViewById(R.id.btnLayout);
         final RelativeLayout progBarLayout = (RelativeLayout)convertView.findViewById(R.id.progBarLayout);
+
+        // Conditions in which user cannot vote (already voted, author of question)
+        if (name.equals(question.getUsername()) || question.getUsers().contains(name)) {
+            btnLayout.setVisibility(View.GONE);
+            progBarLayout.setVisibility(View.VISIBLE);
+        }
 
         btnOpt1.setText(question.getOpt1());
         btnOpt2.setText(question.getOpt2());
@@ -122,12 +133,14 @@ class FeedListAdapter extends ArrayAdapter<Question> {
         btnOpt1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                btnLayout.setVisibility(view.GONE);
-                progBarLayout.setVisibility(view.VISIBLE);
+                btnLayout.setVisibility(View.GONE);
+                progBarLayout.setVisibility(View.VISIBLE);
 
                 notifyDataSetChanged();
 
                 question.vote1();
+
+                if (!name.equals("")) question.addUser(name);
 
                 AsyncTask.execute(new Runnable() {
                     @Override
@@ -158,6 +171,8 @@ class FeedListAdapter extends ArrayAdapter<Question> {
                 notifyDataSetChanged();
 
                 question.vote2();
+
+                if (!name.equals("")) question.addUser(name);
 
                 AsyncTask.execute(new Runnable() {
                     @Override

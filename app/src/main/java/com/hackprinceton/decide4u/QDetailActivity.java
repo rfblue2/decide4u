@@ -49,6 +49,9 @@ public class QDetailActivity extends AppCompatActivity{
         Bundle bundle = intent.getExtras();
         final Question question = (Question) bundle.getSerializable(QUESTION_KEY);
 
+        final String name = mContext.getSharedPreferences(LoginActivity.LOGIN_PREF, Context.MODE_PRIVATE).getString(LoginActivity.USERNAME_KEY, "");
+
+
         TextView questionTitle = (TextView) findViewById(R.id.qTitle);
         TextView questionUser = (TextView) findViewById(R.id.qUsername);
         Button questionOpt1 = (Button) findViewById(R.id.btnOpt1);
@@ -63,10 +66,14 @@ public class QDetailActivity extends AppCompatActivity{
 
 
         // Declare button, button layout variables
-        Button btnOpt1 = (Button) findViewById(R.id.btnOpt1);
-        Button btnOpt2 = (Button) findViewById(R.id.btnOpt2);
         final LinearLayout btnLayout = (LinearLayout) findViewById(R.id.btnLayout);
         final RelativeLayout progBarLayout = (RelativeLayout) findViewById(R.id.progBarLayout);
+
+        // Conditions in which user cannot vote (already voted, author of question)
+        if (name.equals(question.getUsername()) || question.getUsers().contains(name)) {
+            btnLayout.setVisibility(View.GONE);
+            progBarLayout.setVisibility(View.VISIBLE);
+        }
 
         // Progress bar
         int opt1Votes = question.getOpt1Votes();
@@ -110,6 +117,8 @@ public class QDetailActivity extends AppCompatActivity{
 
                 question.vote1();
 
+                if (!name.equals("")) question.addUser(name);
+
                 AsyncTask.execute(new Runnable() {
                     @Override
                     public void run() {
@@ -133,16 +142,17 @@ public class QDetailActivity extends AppCompatActivity{
 
         questionOpt2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                btnLayout.setVisibility(view.GONE);
+                btnLayout.setVisibility(View.GONE);
 
                 TextView prog1Name = (TextView) findViewById(R.id.prog1Name);
                 TextView prog2Name = (TextView) findViewById(R.id.prog2Name);
                 prog1Name.setText(question.getOpt1());
                 prog2Name.setText(question.getOpt2());
 
-                progBarLayout.setVisibility(view.VISIBLE);
-
+                progBarLayout.setVisibility(View.VISIBLE);
                 question.vote2();
+
+                if (!name.equals("")) question.addUser(name);
 
                 AsyncTask.execute(new Runnable() {
                     @Override
