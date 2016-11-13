@@ -30,13 +30,23 @@
         tools:context="com.hackprinceton.decide4u.DashActivity">
 
         <Button
-            android:text="NEW DECISION"
-            android:textSize="24sp"
+            android:text="New Decision"
+            android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
             android:id="@+id/new_dec"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:text="Refresh"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_refresh"
+            android:layout_alignBaseline="@+id/new_dec"
+            android:layout_alignBottom="@+id/new_dec"
+            android:layout_toLeftOf="@+id/new_dec"
             android:layout_alignParentEnd="true" />
 
         <ListView

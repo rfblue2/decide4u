@@ -33,8 +33,9 @@ public class DashFragment extends Fragment implements AdapterView.OnItemClickLis
     private static final String TAG = "TAG-DashFragment";
 
     private Button newDec;
+    private Button btnRefresh;
     private ListView myQuestions;
-
+    private DashListAdapter adapter;
     private Context mContext;
 
     private ApiEndpointInterface mApiService;
@@ -69,6 +70,14 @@ public class DashFragment extends Fragment implements AdapterView.OnItemClickLis
             }
         });
 
+        btnRefresh = (Button) view.findViewById(R.id.btn_refresh);
+        btnRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                refresh();
+            }
+        });
+
         myQuestions = (ListView) view.findViewById(R.id.my_questions);
         myQuestions.setOnItemClickListener(this);
 
@@ -80,7 +89,7 @@ public class DashFragment extends Fragment implements AdapterView.OnItemClickLis
 
         List<Question> qList = new ArrayList<Question>();
 
-        DashListAdapter adapter = new DashListAdapter(mContext, qList);
+        adapter = new DashListAdapter(mContext, qList);
         myQuestions.setAdapter(adapter);
 
         return view;
@@ -116,6 +125,31 @@ public class DashFragment extends Fragment implements AdapterView.OnItemClickLis
         });
     }
 
+    private void refresh() {
+        // Pull from server recent
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                String name = mContext.getSharedPreferences(LoginActivity.LOGIN_PREF, Context.MODE_PRIVATE).getString(LoginActivity.USERNAME_KEY, "user2");
+                Call<List<Question>> call = mApiService.list(name);
+                call.enqueue(new Callback<List<Question>>() {
+                    @Override
+                    public void onResponse(Call<List<Question>> call, Response<List<Question>> response) {
+                        Log.d(TAG, "List feed q's success: " + (new Gson()).toJson(response.body()));
+
+                        adapter = new DashListAdapter(mContext, (List<Question>)response.body());
+                        myQuestions.setAdapter(adapter);
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Question>> call, Throwable t) {
+                        Log.d(TAG, "List feed q's fail");
+                        t.printStackTrace();
+                    }
+                });
+            }
+        });
+    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
