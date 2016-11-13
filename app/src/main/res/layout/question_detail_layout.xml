@@ -83,19 +83,25 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:text="Option 1"
-                android:textColor="#111122"
                 android:focusable="false"
                 android:paddingRight="8dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:background="#FF1446a0"
+                android:textColor="#FF6989c2" />
+            <Space
+                android:layout_width="12dp"
+                android:layout_height="match_parent" />
             <Button
                 android:id="@+id/btnOpt2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:background="#DB3069"
                 android:text="Option 2"
-                android:textColor="#111122"
+                android:textColor="#eb8ead"
                 android:focusable="false"
                 android:paddingLeft="8dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                style="?android:attr/borderlessButtonStyle" />
         </LinearLayout>
         <RelativeLayout
             android:id="@+id/progBarLayout"
